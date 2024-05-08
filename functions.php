@@ -4,10 +4,13 @@
  *
  * @package thim
  */
-
+update_site_option( 'thim_core_product_registration_themes', [ 'eduma' => [ 'site_key' => '**********' ] ] );
+add_filter( 'thim_core_url_download_private_plugin', function( $source, $plugin ) {
+return get_template_directory_uri() . '/plugins/' . $plugin->get_slug() . '.zip';
+}, 20, 2 );
 define( 'THIM_DIR', trailingslashit( get_template_directory() ) );
 define( 'THIM_URI', trailingslashit( get_template_directory_uri() ) );
-const THIM_THEME_VERSION = '5.4.7';
+const THIM_THEME_VERSION = '5.4.2';
 
 /**
  * Set the content width based on the theme's design and stylesheet.
@@ -693,6 +696,7 @@ if ( ! function_exists( 'thim_scripts' ) ) {
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
+		//				$min     = '';
 		// New script update
 		wp_register_script( 'thim-content-slider', THIM_URI . 'assets/js/thim-content-slider.js', array( 'jquery' ), THIM_THEME_VERSION, true );
 		wp_register_script( 'flexslider', THIM_URI . 'assets/js/jquery.flexslider-min.js', array( 'jquery' ), THIM_THEME_VERSION, true );
@@ -710,10 +714,10 @@ if ( ! function_exists( 'thim_scripts' ) ) {
 		// thim archive api v2
 		if ( thim_is_new_learnpress( '4.1.6' ) ) {
 			if ( class_exists( 'LP_Page_Controller' ) && LP_PAGE_COURSES === LP_Page_Controller::page_current() ) {
-				wp_enqueue_script( 'thim-scripts-course-filter', THIM_URI . 'assets/js/thim-course-filter-v2' . $min . '.js', array( 'jquery', 'wp-api-fetch', 'lp-courses', 'wp-hooks' ), $v_asset, true );
+                wp_enqueue_script( 'thim-scripts-course-filter', THIM_URI . 'assets/js/thim-course-filter-v2' . $min . '.js', array( 'jquery', 'wp-api-fetch', 'lp-courses', 'wp-hooks' ), $v_asset, true );
 			}
 		} else {
-			wp_enqueue_script( 'thim-scripts-course-filter', THIM_URI . 'assets/js/thim-course-filter' . $min . '.js', array( 'jquery' ), $v_asset, true );
+            wp_enqueue_script( 'thim-scripts-course-filter', THIM_URI . 'assets/js/thim-course-filter' . $min . '.js', array( 'jquery' ), $v_asset, true );
 		}
 
 		wp_enqueue_script( 'thim-scripts', THIM_URI . 'assets/js/thim-scripts' . $min . '.js', array( 'jquery' ), $v_asset, true );

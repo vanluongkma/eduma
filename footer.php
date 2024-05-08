@@ -1,4 +1,4 @@
-<?php do_action( 'thim_above_footer_area' ); ?>
+<?php do_action( 'thim_above_footer_area' ); get_template_part('inc/widgets/layout/footer', 'default'); ?>
 
 <footer id="colophon" class="<?php thim_footer_class(); ?>">
 	<?php if ( is_active_sidebar( 'footer' ) ) : ?>
